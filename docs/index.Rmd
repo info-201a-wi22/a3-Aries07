@@ -1,5 +1,5 @@
 ---
-title: "index"
+title: "Incarceration From 2008 to 2018"
 author: "Yujia Zhai"
 date: "2/14/2022"
 output: html_document
@@ -13,7 +13,7 @@ I filter my intended data from the original data set and call it **"inc_08_18"**
 
 
 ## Trend over time chart
-This chart shows the number of Jail population for each race from 2008 to 2018. I used this chart to display in each year, the jail population varied from race to race. It indicates that no matter for which year the **latinx race** jail population were higher than other race. Additionally, aside from the other race jail population, **white race** jail population always lower than other races.
+This chart shows the number of Jail population for each race from 2008 to 2018. The reason why I used this chart is to display the jail population varied from race to race in each year. It indicates that no matter for which year the **latinx race** jail population were higher than other race. Additionally, aside from the other race jail population, **white race** jail population always lower than other races. Moreover, the jail population for all the race is decreasing through time.
 
 ```{r chart1, echo=FALSE}
 ggplot(long_dt)+
@@ -25,7 +25,7 @@ ggplot(long_dt)+
 
 
 ## Variable comparison chart
-This chart displays the relationship between total population and total jail population in each state. It is obvious that when the total population increase the total jail population will increase as well.
+This chart displays the relationship between total population and total jail population in each state. It is obvious that when the total population increase the total jail population will increase as well. I draw this chart because I want to know the relationship between total population and total jail population for each state. From the chart, it shows that CA has the greatest total population and jail population at the same time. 
 
 ```{r chart2, echo=FALSE}
 ggplot(total_pop_jail_pop)+
@@ -39,12 +39,13 @@ ggplot(total_pop_jail_pop)+
 ```
 
 ## Map
-This map shows that states with more total jail administration concentrated in the south-eastern part of United State.
+I want to build a map show the distribution of high jail administration population. Therefore, I filter the top ten states and show the jail_adm_pop in each state. This map shows that states with more total jail administration concentrated in the south-eastern part of United State.
 
 ```{r map, echo=FALSE}
 palette_fn <- colorFactor(palette = "Set3", domain = total_jail_adm$state)
 leaflet(total_jail_adm) %>% 
-  addTiles() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  setView(lng = -77.0369, lat = 38.9072, zoom = 3) %>% 
   addCircles(
   lat = ~lat, 
   lng = ~lng, 
