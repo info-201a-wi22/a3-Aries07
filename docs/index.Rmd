@@ -1,0 +1,62 @@
+---
+title: "index"
+author: "Yujia Zhai"
+date: "2/14/2022"
+output: html_document
+---
+```{r source, echo=FALSE, message=FALSE, warning=FALSE}
+source("C:/Users/Y/Desktop/code/a3-Aries07/source/analysis.R")
+```
+## Summary Information
+I filter my intended data from the original data set and call it **"inc_08_18"**, and it means the data set from 2008 to 2018. In the new data set it has **`r num_obser`** observations, and **`r num_feature`** features. In 2018, the average total jail population is **`r ave_total_jail_latest`**. In **`r highest_female_year`**, female from 15 to 64 years old, has highest jail population value between 2008 and 2018. In **`r highest_male_county`**, male jail population has highest average value from 2008 to 2018. Finally, the highest total jail population change from 2008 to 2018 is **`r total_jail_diff_08to18`**.
+
+
+
+## Trend over time chart
+This chart shows the number of Jail population for each race from 2008 to 2018. I used this chart to display in each year, the jail population varied from race to race. It indicates that no matter for which year the **latinx race** jail population were higher than other race. Additionally, aside from the other race jail population, **white race** jail population always lower than other races.
+
+```{r chart1, echo=FALSE}
+ggplot(long_dt)+
+  geom_point(mapping = aes(x = year, y = pop, color = race), 
+             alpha = 3)+
+  labs( title = "Jail population for race from 2008 to 2018",
+        x = "Year", y = "Population", color = "Race")
+```
+
+
+## Variable comparison chart
+This chart displays the relationship between total population and total jail population in each state. It is obvious that when the total population increase the total jail population will increase as well.
+
+```{r chart2, echo=FALSE}
+ggplot(total_pop_jail_pop)+
+  geom_point(mapping = aes(x = total_jail_pop, y = total_pop, color = state),
+             alpha = 3)+
+  labs(title = "Total population and total jail population for each state from 2008 to 2018 ",
+       x = "Jail Population",
+       y = "Total Population",
+       color = "State")
+
+```
+
+## Map
+This map shows that states with more total jail administration concentrated in the south-eastern part of United State.
+
+```{r map, echo=FALSE}
+palette_fn <- colorFactor(palette = "Set3", domain = total_jail_adm$state)
+leaflet(total_jail_adm) %>% 
+  addTiles() %>% 
+  addCircles(
+  lat = ~lat, 
+  lng = ~lng, 
+  stroke = FALSE, 
+  popup = ~total_jail_adm,
+  color = ~palette_fn(state)
+) %>% 
+addLegend(
+  position = "bottomright",
+  title = "Jial population in Top 10 state",
+  pal = palette_fn,
+  values = ~state, 
+  opacity = 1
+)
+```
