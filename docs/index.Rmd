@@ -13,7 +13,7 @@ I filter my intended data from the original data set and call it **"inc_08_18"**
 
 
 ## Trend over time chart
-This chart shows the number of Jail population for each race from 2008 to 2018. The reason why I used this chart is to display the jail population varied from race to race in each year. It indicates that no matter for which year the **latinx race** jail population were higher than other race. Additionally, aside from the other race jail population, **white race** jail population always lower than other races. Moreover, the jail population for all the race is decreasing through time.
+This chart shows the number of Jail population for each race from 2008 to 2018. The reason why I used this chart is to display the jail population varied from race to race in each year. It indicates that no matter for which year the overall **latinx race** jail population were higher than other race. Additionally, aside from the other race jail population, overall **white race** jail population always lower than other races. Moreover, the jail population for all the race is decreasing through time.
 
 ```{r chart1, echo=FALSE}
 ggplot(long_dt)+
@@ -39,7 +39,7 @@ ggplot(total_pop_jail_pop)+
 ```
 
 ## Map
-I want to build a map show the distribution of high jail administration population. Therefore, I filter the top ten states and show the jail_adm_pop in each state. This map shows that states with more total jail administration concentrated in the south-eastern part of United State.
+I want to build a map show the distribution of high jail administration population. Therefore, I filter the top ten states and show the jail_adm_pop in each state. This map shows that states with more total jail administration concentrated in the south-eastern part of United State.The distribution shows that the jail administration population is related to location.
 
 ```{r map, echo=FALSE}
 palette_fn <- colorFactor(palette = "Set3", domain = total_jail_adm$state)
